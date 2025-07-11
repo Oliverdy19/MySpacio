@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Amortización</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    
+
+</head>
+<body>
+    <header class="header-green">
+        <div class="container">
+            <h1 class="text-center mb-3">Calculadora de Préstamos con Abonos Extra</h1>
+            <p class="text-center mb-0">Simula cómo los abonos anticipados reducen tu deuda y ahorran intereses</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="section-card">
+            <form id="prestamoForm">
+                    <h3 class="section-title"><i class="fas fa-bank me-2"></i>Datos del Préstamo</h3>
+
+                <!-- Primera fila: Banco y Tipo de Préstamo -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="banco" class="form-label">Banco</label>
+                            <select class="form-select" id="banco" required>
+                                <option value="" selected disabled>Selecciona un banco</option>
+                                <option value="Banco Popular">Banco Popular</option>
+                                <option value="Banreservas">Banreservas</option>
+                                <option value="Banesco">Banesco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="tipo_prestamo" class="form-label d-flex justify-content-between align-items-center">Tipo de Préstamo</label>
+                            <select class="form-select" id="tipo_prestamo" required disabled>
+                                <option value="" selected disabled>Primero selecciona un banco</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Segunda fila: Monto, Tasa y Plazo -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="monto" class="form-label">Monto del Préstamo</label>
+                            <div class="input-group">
+                                <span class="input-group-text">RD$</span>
+                                <input type="text" class="form-control" id="monto" placeholder="500,000" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="tasa" class="form-label">Tasa de Interés Anual</label>
+                            <div class="input-group">
+                                <span class="input-group-text">%</span>
+                                <input type="number" step="0.01" class="form-control" id="tasa" placeholder="12.5" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="plazo" class="form-label">Plazo</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                <input type="number" class="form-control" id="plazo" placeholder="60" required>
+                                <span class="input-group-text">meses</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-info-circle me-2"></i>Información del Préstamo</h3>
+                    <div class="info-card mb-4">
+                        <div id="infoPrestamo">Selecciona un banco y tipo de préstamo para ver información específica.</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-calculator me-2"></i>Abonos Extra</h3>
+                    
+                    <div class="mb-4">
+                        <label class="form-label">Tipo de Abonos Extra</label>
+                        <select class="form-select" id="tipoAbono">
+                            <option value="personalizado">Personalizado (elegir meses específicos)</option>
+                            <option value="mensual">Mismo abono cada mes</option>
+                            <option value="cada_n">Abono cada N meses</option>
+                        </select>
+                    </div>
+
+                    <div id="abonosContainer">
+                        <!-- Aquí se generarán dinámicamente los campos de abonos -->
+                    </div>
+                </div>
+
+                <div class="form-actions mt-4">
+                    <button type="submit" class="btn btn-success btn-lg w-100">
+                        <i class="fas fa-calculator me-2"></i>Calcular
+                    </button>
+                    <button type="button" id="limpiarBtn" class="btn btn-outline-secondary btn-lg w-100 mt-3">
+                        <i class="fas fa-broom me-2"></i>Limpiar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="resultados" class="section-card" style="display: none;">
+            <h3 class="text-center mb-4"><i class="fas fa-chart-line me-2"></i>Resultados de la Simulación</h3>
+            
+            <div class="results-grid">
+                <div class="result-card result-card-success">
+                    <h5 class="result-title"><i class="fas fa-check-circle me-2"></i>Resumen con Abonos Extra</h5>
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">Total Intereses:</span>
+                            <span class="result-value" id="totalIntereses">RD$ 0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Plazo Final:</span>
+                            <span class="result-value" id="plazoFinal">0 meses</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Abonado Extra:</span>
+                            <span class="result-value" id="totalAbonado">RD$ 0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Pagado:</span>
+                            <span class="result-value" id="totalPagado">RD$ 0.00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-card result-card-info">
+                    <h5 class="result-title"><i class="fas fa-balance-scale me-2"></i>Comparación con Plan Original</h5>
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">Ahorro en Intereses:</span>
+                            <span class="result-value text-success" id="ahorro">RD$ 0.00</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Meses Reducidos:</span>
+                            <span class="result-value text-success" id="mesesReducidos">0 meses</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Pagado Original:</span>
+                            <span class="result-value" id="totalPagadoOriginal">RD$ 0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="amortizacion-section mt-5">
+                <h5 class="text-center mb-3"><i class="fas fa-table me-2"></i>Tabla de Amortización</h5>
+                <div class="amortizacion-scroll">
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Cuota</th>
+                                <th>Interés</th>
+                                <th>Abono Capital</th>
+                                <th>Abono Extra</th>
+                                <th>Saldo Restante</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaAmortizacion">
+                            <!-- Aquí se generará la tabla de amortización -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

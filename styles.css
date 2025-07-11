@@ -1,0 +1,314 @@
+:root {
+    --primary-color: #2e7d32;
+    --primary-light: #4caf50;
+    --primary-dark: #1b5e20;
+    --accent-color: #66bb6a;
+    --success-bg: #e8f5e8;
+    --info-bg: #e3f2fd;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f8f9fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    min-height: 100vh;
+}
+
+.header-green {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    padding: 2.5rem 0;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header-green h1 {
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.header-green p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-weight: 400;
+    position: relative;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.section-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+    border: none;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-card {
+    background: var(--success-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.95rem;
+}
+
+.form-control, .form-select {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #495057;
+    font-weight: 500;
+}
+
+.btn {
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-success {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-success:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+    border-width: 2px;
+}
+
+.btn-lg {
+    padding: 0.9rem;
+    font-size: 1.05rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .results-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.result-card {
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.result-card-success {
+    background: var(--success-bg);
+    border-left: 4px solid var(--primary-color);
+}
+
+.result-card-info {
+    background: var(--info-bg);
+    border-left: 4px solid #1976d2;
+}
+
+.result-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.result-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.result-value {
+    font-weight: 600;
+    color: #212529;
+}
+
+.amortizacion-section {
+    margin-top: 2rem;
+}
+
+.amortizacion-scroll {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: var(--border-radius);
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+.amortizacion-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.amortizacion-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.amortizacion-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(46, 125, 50, 0.05);
+}
+
+.table td {
+    padding: 0.75rem;
+    text-align: center;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-green {
+        padding: 2rem 0;
+    }
+    
+    .header-green h1 {
+        font-size: 1.6rem;
+    }
+    
+    .header-green p {
+        font-size: 1rem;
+    }
+    
+    .section-card {
+        padding: 1.5rem;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section-card {
+        padding: 1.25rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    .table thead th,
+    .table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Estilos para texto resaltado */
+.resaltado {
+    color: #1b5e20;          /* Texto oscuro para mejor contraste */
+    font-weight: 800;          /* Semi-negrita */
+}
