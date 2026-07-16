@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* 1. Importación base de Tailwind v4 */
+@import "tailwindcss";
+
+/* Esto le dice a Tailwind v4: "usa la clase .dark en el HTML, no el sistema operativo" */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Paleta Ejecutiva de Alto Rendimiento */
+@theme {
+  --font-body: "Inter", sans-serif;
+  --font-display: "Manrope", sans-serif;
+
+  /* Fondos Premium (Gris obsidiana de SaaS B2B) */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e2e8f0;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  /* El fondo de tu aplicación: un oscuro profundo y costoso */
+  --color-ink-950: #090d16;
+  /* El fondo para tus tarjetas, menú lateral y componentes */
+  --color-ink-card: #111625;
+  /* Un tono sutilmente más claro para los estados 'hover' de las tarjetas */
+  --color-ink-elevated: #1a2235;
+
+  /* Colores de Marca extraídos directamente de tu Logo */
+  --color-brand-green: #a3e635;   /* El verde lima vibrante de "TÚ" */
+  --color-brand-pink: #f43f5e;    /* El fucsia/magenta de "EL NOMBRE" */
+  --color-brand-yellow: #f59e0b;  /* El naranja/ámbar cálido de la fruta y el jugo */
+}
+
+/* 3. Estilos base */
+@layer base {
+  html {
+    /* El antialiased es CRUCIAL para el look premium en pantallas de alta resolución */
+    @apply font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    /* Añadimos un color de selección personalizado usando el verde de tu marca */
+    @apply bg-ink-50 text-ink-900 dark:bg-ink-950 dark:text-ink-100 transition-colors duration-300 selection:bg-brand-green/30 selection:text-brand-green;
+  }
+
+  /* Ajuste de tracking (espaciado de letras) en títulos para un look más moderno */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-ink-950 dark:text-white;
+  }
+}
+
+/* 4. Utilidades Premium */
+
+/* Scrollbar estilo macOS: Invisible o sutil hasta que pasas el mouse */
+@utility scrollbar-thin {
+  scrollbar-width: thin; /* Para Firefox */
+  scrollbar-color: var(--color-ink-300) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply bg-ink-300/50 dark:bg-ink-700/50 rounded-full;
+    transition: background-color 0.3s ease;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    @apply bg-ink-400 dark:bg-ink-600;
+  }
+}
+
+/* Efecto Glassmorphism (Cristal) para menús de navegación o modales */
+@utility glass {
+  @apply bg-white/70 dark:bg-ink-card/70 backdrop-blur-lg border border-ink-200/50 dark:border-ink-700/50 shadow-sm;
+}
+
+/* Texto con el gradiente de tus 3 colores de marca (ideal para acentos o el título principal) */
+@utility text-gradient-brand {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-pink via-brand-yellow to-brand-green;
+}
+
+/* Clases para tarjetas con un borde y sombra sutiles que se elevan al hacer hover */
+@utility premium-card {
+  @apply bg-white dark:bg-ink-card rounded-2xl border border-ink-200 dark:border-ink-800/80 shadow-sm hover:shadow-md hover:border-ink-300 dark:hover:border-ink-700 transition-all duration-300;
+}

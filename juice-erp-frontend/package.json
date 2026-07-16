@@ -1,0 +1,32 @@
+{
+  "name": "juice-erp-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "homepage": "https://Oliverdy19.github.io/MySpacio",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.x.x",
+    "@tailwindcss/postcss": "^4.3.2",
+    "autoprefixer": "^10.5.3",
+    "lucide-react": "^1.24.0",
+    "postcss": "^8.5.19",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1",
+    "ws": "^8.21.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.0",
+    "gh-pages": "^6.1.0"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-linux-x64-gnu": "^1.1.5"
+  }
+}
