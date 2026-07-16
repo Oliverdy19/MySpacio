@@ -1,38 +1,33 @@
-name: Deploy a GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: cd juice-erp-frontend && npm ci
-      - run: cd juice-erp-frontend && npm run build
+      
+      - name: Install dependencies
+        run: cd juice-erp-frontend && npm ci
+      
+      - name: Build ERP
+        run: cd juice-erp-frontend && npm run build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-      - run: cp juice-erp-frontend/dist/index.html juice-erp-frontend/dist/404.html
-      - uses: actions/upload-pages-artifact@v3
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./juice-erp-frontend/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./juice-erp-frontend/dist
+          cname: ''
